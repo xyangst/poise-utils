@@ -1,5 +1,5 @@
 use poise::{
-    serenity_prelude::{CreateEmbed, Timestamp},
+    serenity_prelude::{CreateAttachment, CreateEmbed, Timestamp},
     CreateReply, ReplyHandle,
 };
 
@@ -44,6 +44,12 @@ impl IntoMessage for &str {
         } else {
             builder.content = Some(self.to_owned());
         };
+    }
+}
+
+impl IntoMessage for CreateAttachment {
+    fn into_message(self, builder: &mut CreateReply) {
+        builder.attachments.push(self);
     }
 }
 
